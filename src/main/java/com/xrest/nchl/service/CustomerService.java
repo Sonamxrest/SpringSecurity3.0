@@ -9,7 +9,6 @@ import java.util.Map;
 
 public interface CustomerService extends BaseService<Customer,Long>, UserDetailsService {
 
-    List<Customer> findAllByBankId(Long bankId);
     Customer uploadProfile(MultipartFile file , Long id);
 
     List<Customer> getAll(Map<String, String> map);

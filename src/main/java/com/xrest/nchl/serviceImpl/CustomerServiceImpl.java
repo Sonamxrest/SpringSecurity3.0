@@ -27,10 +27,6 @@ public class CustomerServiceImpl extends BaseServiceImpl<Customer, Long> impleme
         this.customerRepository = customerRepository;
     }
 
-    @Override
-    public List<Customer> findAllByBankId(Long bankId) {
-        return this.customerRepository.getAllCustomerByBankId(bankId);
-    }
 
     @Override
     public Customer uploadProfile(MultipartFile file, Long id) {

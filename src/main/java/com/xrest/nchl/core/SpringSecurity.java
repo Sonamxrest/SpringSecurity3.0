@@ -40,7 +40,9 @@ public class SpringSecurity {
                 .authorizeHttpRequests()
                 .requestMatchers("/v1/customer/login").permitAll()
                 .requestMatchers("/v1/customer/signup").permitAll()
-                .requestMatchers(HttpMethod.GET).hasRole(RoleType.ADMIN.label)
+                .requestMatchers("/v1/customer/load").permitAll()
+//                .requestMatchers(HttpMethod.GET).hasRole(RoleType.ADMIN.label)
+                .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest()
                 .authenticated()
                 .and().authenticationProvider(daoAuthenticationProvider());

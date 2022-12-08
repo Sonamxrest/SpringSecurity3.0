@@ -1,5 +1,7 @@
 package com.xrest.nchl.core;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.xrest.nchl.enums.ExceptionTypes;
 import com.xrest.nchl.model.Customer;
 import com.xrest.nchl.service.CustomerService;
 import jakarta.servlet.FilterChain;
@@ -42,12 +44,18 @@ public class AuthFilter extends GenericFilterBean {
                     UserDetails customer =  customerService.loadUserByUsername(username);
                     Authentication authentication = new UsernamePasswordAuthenticationToken(customer, customer.getPassword(), customer.getAuthorities());
                     SecurityContextHolder.getContext().setAuthentication(authentication);
+                } else {
+                    throw new TokenExpiredException(ExceptionTypes.TOKEN_EXPIRED.label);
                 }
             }
             filterChain.doFilter(servletRequest, servletResponse);
             resetAuthenticationAfterRequest();
         } catch (Exception eje) {
             ((HttpServletResponse) servletResponse).setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            if (eje.getMessage().equals(ExceptionTypes.TOKEN_EXPIRED.label)) {
+                servletResponse.getWriter().write(ExceptionTypes.TOKEN_EXPIRED.label);
+                servletResponse.getWriter().flush();
+            }
             LOGGER.debug("Exception " + eje.getMessage(), eje);
         }
     }

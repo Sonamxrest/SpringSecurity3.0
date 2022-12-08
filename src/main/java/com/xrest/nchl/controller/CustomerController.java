@@ -61,6 +61,16 @@ public class CustomerController extends BaseController<Customer, Long> {
     private ResponseEntity<?> get(@RequestBody Map<String, String> obj) {
         return new RestResponseDto().successModel(customerService.getAll(obj));
     }
+ @PostMapping("/load")
+    private ResponseEntity<?> get(@RequestBody String username) {
+     Customer customer1 = (Customer) customerService.loadUserByUsername(username);
+     return new RestResponseDto().successModel(customer1);
+    }
+ @PostMapping("/authenticate")
+    private ResponseEntity<?> authenticate(@RequestBody String token) {
+     Customer customer1 = (Customer) customerService.loadUserByUsername(JWTUtils.decode(token));
+     return new RestResponseDto().successModel(customer1);
+    }
 
     @PostMapping("/login")
     private ResponseEntity<?> login(@RequestBody Customer customer) {
