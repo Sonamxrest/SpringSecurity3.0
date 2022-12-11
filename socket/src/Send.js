@@ -8,7 +8,6 @@ const Send = () => {
     const [revieved, setRecieved] = useState([]);
     const [id, setId] = useState(1);
     const [send, setSend] = useState([]);
-    // const sockJs = new SockJS('', null, {});
     const [message, setMessage] = useState('');
 
     let onConnected = () => {
@@ -17,10 +16,9 @@ const Send = () => {
 
     let onMessageReceived = (msg) => {
         setRecieved((e) => [...e, msg.message]);
-        // setMessage('');
     }
     const sendMsg = () => {
-        let mesg = setSend((e) => [...e, message]);
+        setSend((e) => [...e, message]);
         setMessage('')
         axios.post('http://localhost:8082/web/send', { id: id, message: message, sender: true }, {}).then((res) => {
 
@@ -63,7 +61,6 @@ const Send = () => {
                             <div class="avatar"><img src="https://i.imgur.com/HYcn9xO.png" draggable="false" /></div>
                             <div class="msg">
                                 <p>{e}</p>
-                                {/* <p><a href="https://codepen.io/Varo/pen/YPmwpQ" target="parent">Chat UI 2.0</a></p> */}
                                 <time>18:09</time>
                             </div>
                         </li>

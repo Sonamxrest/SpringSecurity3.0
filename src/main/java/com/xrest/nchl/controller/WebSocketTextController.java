@@ -16,28 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("web")
 public class WebSocketTextController {
+    @Autowired
+    public SimpMessagingTemplate template;
 
-    public final SimpMessagingTemplate template;
-
-    public WebSocketTextController(SimpMessagingTemplate template) {
-        this.template = template;
-    }
 
     @PostMapping("/send")
     public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDto textMessageDTO) {
-//        template.convertAndSend("/topic/sender", textMessageDTO);
-        template.convertAndSend("/topic/recieve/"+ (textMessageDTO.getId() == 0 ? 1: 0), textMessageDTO);
+        template.convertAndSend("/topic/recieve/" + (textMessageDTO.getId() == 0 ? 1 : 0), textMessageDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @MessageMapping("/sendMessage")
-    public void receiveMessage(@Payload TextMessageDto textMessageDTO) {
-        System.out.println(textMessageDTO);
-    }
-
-
-    @SendTo("/topic/message")
-    public TextMessageDto broadcastMessage(@Payload TextMessageDto textMessageDTO) {
-        return textMessageDTO;
-    }
+//    @MessageMapping("/sendMessage")
+//    public void receiveMessage(@Payload TextMessageDto textMessageDTO) {
+//        System.out.println(textMessageDTO);
+//    }
+//
+//
+//    @SendTo("/topic/message")
+//    public TextMessageDto broadcastMessage(@Payload TextMessageDto textMessageDTO) {
+//        return textMessageDTO;
+//    }
 }

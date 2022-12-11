@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.core.Authentication;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class JWTUtils {

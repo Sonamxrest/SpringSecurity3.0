@@ -8,7 +8,6 @@ const Recieve = () => {
     const [revieved, setRecieved] = useState([]);
     const [id, setId] = useState(0);
     const [send, setSend] = useState([]);
-    // const sockJs = new SockJS('', null, {});
     const [message, setMessage] = useState('');
 
     let onConnected = () => {
@@ -17,7 +16,6 @@ const Recieve = () => {
 
     let onMessageReceived = (msg) => {
         setRecieved((e) => [...e, msg.message]);
-        // setMessage('');
     }
     const sendMsg = () => {
         setSend((e) => [...e, message]);
@@ -63,7 +61,6 @@ const Recieve = () => {
                             <div class="avatar"><img src="https://i.imgur.com/DY6gND0.png" draggable="false" /></div>
                             <div class="msg">
                                 <p>{e}</p>
-                                {/* <p><a href="https://codepen.io/Varo/pen/YPmwpQ" target="parent">Chat UI 2.0</a></p> */}
                                 <time>18:09</time>
                             </div>
                         </li>
