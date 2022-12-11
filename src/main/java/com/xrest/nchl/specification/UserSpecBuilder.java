@@ -9,7 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 public class UserSpecBuilder {
-    private  final Map<String, String> params;
+    private final Map<String, String> params;
+
     public UserSpecBuilder(Map<String, String> params) {
         this.params = params;
     }
@@ -20,7 +21,7 @@ public class UserSpecBuilder {
         }
         List<String> parameters = new ArrayList<>(params.keySet());
         Specification<Customer> specification = new UserSpec(parameters.get(0), params.get(parameters.get(0)));
-        for (String p: parameters) {
+        for (String p : parameters) {
             specification = Specification.where(specification).and(new UserSpec(p, params.get(p)));
         }
         return specification;

@@ -23,8 +23,7 @@ public class UserSpec implements Specification<Customer> {
     public Predicate toPredicate(Root<Customer> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         switch (property) {
             case FIRST_NAME -> {
-                return criteriaBuilder
-                        .like(criteriaBuilder.lower(root.get(property)), value.toLowerCase() + "%");
+                return criteriaBuilder.like(criteriaBuilder.lower(root.get(property)), value.toLowerCase() + "%");
 
             }
             case BALANCE -> {
@@ -32,7 +31,7 @@ public class UserSpec implements Specification<Customer> {
 
             }
             default -> {
-                return  null;
+                return null;
             }
         }
     }

@@ -15,7 +15,7 @@ public class Account extends BaseModel<Long> {
     private String accountName;
     @JsonProperty("account_number")
     private String accountNumber;
-    private String balance;
+    private double balance;
     @OneToOne
     @JoinColumn(name = "bank_id", referencedColumnName = "id")
     private Bank bank;

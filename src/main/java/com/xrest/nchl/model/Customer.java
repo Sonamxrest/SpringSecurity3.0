@@ -60,7 +60,7 @@ public class Customer extends BaseModel<Long> implements UserDetails {
     private Double totalBalance = 0d;
 
     public Double getTotalBalance() {
-        Double b = this.accounts.stream().mapToDouble(d ->  Double.parseDouble(d.getBalance())).sum();
+        Double b = this.accounts.stream().mapToDouble(Account::getBalance).sum();
         setBalance(b);
         return b;
     }
