@@ -16,4 +16,10 @@ public class Registry implements WebMvcConfigurer {
                 .addResourceLocations(os)
                 .setCachePeriod(36000);
     }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins("*");
+    }
 }

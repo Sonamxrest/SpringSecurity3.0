@@ -41,9 +41,11 @@ public class SpringSecurity {
                 .requestMatchers("/v1/customer/login").permitAll()
                 .requestMatchers("/v1/customer/signup").permitAll()
                 .requestMatchers("/v1/customer/load").permitAll()
+                .requestMatchers("/web/**").permitAll()
 //                .requestMatchers(HttpMethod.GET).hasRole(RoleType.ADMIN.label)
                 .requestMatchers(HttpMethod.GET).permitAll()
                 .anyRequest()
+
                 .authenticated()
                 .and().authenticationProvider(daoAuthenticationProvider());
         http.addFilterBefore(new AuthFilter(customerService), UsernamePasswordAuthenticationFilter.class);

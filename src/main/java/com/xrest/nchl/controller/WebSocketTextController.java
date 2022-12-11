@@ -1,2 +1,42 @@
-package com.xrest.nchl.controller;public class WebSocketTextController {
+package com.xrest.nchl.controller;
+
+import com.xrest.nchl.dto.TextMessageDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("web")
+public class WebSocketTextController {
+
+    public final SimpMessagingTemplate template;
+
+    public WebSocketTextController(SimpMessagingTemplate template) {
+        this.template = template;
+    }
+
+    @PostMapping("/send")
+    public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDto textMessageDTO) {
+        template.convertAndSend("/topic/hello", textMessageDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @MessageMapping("/sendMessage")
+    public void receiveMessage(@Payload TextMessageDto textMessageDTO) {
+        // receive message from client
+    }
+
+
+    @SendTo("/topic/message")
+    public TextMessageDto broadcastMessage(@Payload TextMessageDto textMessageDTO) {
+        return textMessageDTO;
+    }
 }

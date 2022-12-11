@@ -6,7 +6,6 @@ import com.xrest.nchl.service.AccountService;
 import com.xrest.nchl.specification.AccountSpecBuilder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 import java.util.Map;
