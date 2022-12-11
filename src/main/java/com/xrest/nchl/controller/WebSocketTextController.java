@@ -31,7 +31,7 @@ public class WebSocketTextController {
 
     @MessageMapping("/sendMessage")
     public void receiveMessage(@Payload TextMessageDto textMessageDTO) {
-        // receive message from client
+        System.out.println(textMessageDTO);
     }
 
 
