@@ -25,7 +25,8 @@ public class WebSocketTextController {
 
     @PostMapping("/send")
     public ResponseEntity<Void> sendMessage(@RequestBody TextMessageDto textMessageDTO) {
-        template.convertAndSend("/topic/hello", textMessageDTO);
+//        template.convertAndSend("/topic/sender", textMessageDTO);
+        template.convertAndSend("/topic/recieve/"+ (textMessageDTO.getId() == 0 ? 1: 0), textMessageDTO);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
