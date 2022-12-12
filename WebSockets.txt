@@ -1,0 +1,26 @@
+Websocket is a protocol designed to overcome architecture limitation.
+Bi-directional communication between server and client.
+Works over TCP protocol.
+STOMP is sub-protocol working over web sockets.
+Stomp is one such sub protocol that can work over Websocket to exchange message between clients.
+
+STOMP is a messaging protocol because clients can produce messages
+(send messages to a broker destination) and consume them
+(subscribe to and receive messages from a broker destination).
+
+@SubscribeMapping is used for one time sending message to clients.
+The @MessageMapping annotation is used for repetitive messaging from application to clients.
+
+In the following example, the method annotated with the @MessageMapping and @SendTo annotations
+with the String return type receives a SEND frame from a client to the /app/request destination,
+performs some action, and sends a MESSAGE frame to the explicit /queue/responses destination.
+
+@Controller
+public class MessageMappingController {
+   @MessageMapping("/request")
+   @SendTo("/queue/responses")
+   public String handleMessageWithExplicitResponse(String message) {
+       logger.info("Message with response: {}", message);
+       return "response to " + HtmlUtils.htmlEscape(message);
+   }
+}
